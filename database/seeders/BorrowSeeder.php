@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Borrow;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 
 class BorrowSeeder extends Seeder
 {
