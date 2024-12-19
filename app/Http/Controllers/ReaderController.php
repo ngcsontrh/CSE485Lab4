@@ -12,8 +12,8 @@ class ReaderController extends Controller
     public function index()
     {
         $i = 1;
-        $page = Reader::orderBy('updated_at','desc')->paginate(10);
-        $readers = Reader::orderBy('updated_at', 'desc')->paginate(10);
+        $page = Reader::orderBy('updated_at','desc')->paginate(20);
+        $readers = Reader::orderBy('updated_at', 'desc')->paginate(20);
         return view('readers.index', compact('readers', 'i', 'page'));
 
     }
