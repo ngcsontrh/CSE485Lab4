@@ -19,9 +19,10 @@
         </div>
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone">
+            <input type="text" class="form-control" id="phone" name="phone"> <br>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('readers.index') }}" class="btn btn-secondary">Back</a>
     </form>
 </div>
 @endsection
