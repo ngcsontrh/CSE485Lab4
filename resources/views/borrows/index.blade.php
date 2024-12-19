@@ -26,7 +26,7 @@
                                     <th>Borrow Date</th>
                                     <th>Return Date</th>
                                     <th>Status</th>
-                                    <th width="280px">Action</th>
+                                    <th class="col-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,13 +46,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <form action="{{ route('borrows.destroy',$borrow->id) }}" method="POST">
+                                            <div action="{{ route('borrows.destroy',$borrow->id) }}" method="POST">
                                                 <a class="btn btn-info btn-sm" href="{{ route('borrows.show',$borrow->id) }}">Show</a>
                                                 <a class="btn btn-primary btn-sm" href="{{ route('borrows.edit',$borrow->id) }}">Edit</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tr>
