@@ -12,7 +12,13 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::orderBy('updated_at', 'desc')->paginate(20);
+        $index = ($books->currentPage() - 1) * $books->perPage() + 1;
+        foreach ($books as $book) {
+            $book->index = $index++;
+        }
+        // dd($books);
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -20,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -28,7 +34,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'author' => 'required',
+            'category' => 'required',
+            'year' => 'required|integer|',
+            'quantity' => 'required|integer',
+        ]);
+
+        Book::create($request->all());
+
+        return redirect()->route('books.index')
+                         ->with('success', 'Book created successfully.');
     }
 
     /**
@@ -36,7 +53,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -44,7 +61,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -52,7 +69,18 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'author' => 'required',
+            'category' => 'required',
+            'year' => 'required|integer',
+            'quantity' => 'required|integer',
+        ]);
+
+        $book->update($request->all());
+
+        return redirect()->route('books.index')
+                         ->with('success', 'Book updated successfully.');
     }
 
     /**
@@ -60,6 +88,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect()->route('books.index')
+                         ->with('success', 'Book deleted successfully.');
     }
 }
